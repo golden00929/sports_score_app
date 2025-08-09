@@ -1044,6 +1044,13 @@ const HomePage: React.FC = () => {
           </Card>
         </Grid>
       </Grid>
+      
+      {/* Version Info */}
+      <Box sx={{ textAlign: 'center', mt: 4, py: 2, opacity: 0.7 }}>
+        <Typography variant="caption" color="text.secondary">
+          Miiracer Badminton v2.0 | Updated: Aug 9, 2025
+        </Typography>
+      </Box>
     </Box>
   );
 };
