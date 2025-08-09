@@ -154,8 +154,8 @@ const HomePage: React.FC = () => {
         <Typography variant="body1" sx={{ opacity: 0.95 }}>
           새로운 대회 관리 시스템이 업데이트되었습니다! 실시간 대회 현황과 참가 신청 기능을 확인해보세요.
         </Typography>
-        <Typography variant="caption" sx={{ opacity: 0.8, display: 'block', mt: 1 }}>
-          DEBUG: allTournamentsData = {JSON.stringify(allTournamentsData?.success)} | Length = {allTournamentsData?.data?.length}
+        <Typography variant="body2" sx={{ opacity: 0.8, display: 'block', mt: 1, fontSize: '0.75rem' }}>
+          📱 모바일 테스트 모드: 관리자 로그인(admin@miiracer.com / admin123!)과 참가신청이 데모 모드로 작동합니다
         </Typography>
       </Paper>
 

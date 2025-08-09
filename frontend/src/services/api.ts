@@ -5,13 +5,16 @@ class ApiService {
   private api: AxiosInstance;
 
   constructor() {
+    // For mobile/production deployment, fall back to mock data if no backend URL
+    const apiURL = process.env.REACT_APP_API_URL || '/api';
+    
     this.api = axios.create({
-      baseURL: process.env.REACT_APP_API_URL || '/api',
+      baseURL: apiURL,
       timeout: 10000,
       headers: {
         'Content-Type': 'application/json',
       },
-      withCredentials: true,
+      withCredentials: apiURL.startsWith('http') ? false : true, // Disable cookies for external APIs
     });
 
     // Request interceptor
@@ -51,13 +54,47 @@ class ApiService {
     );
   }
 
+  // Helper method to check if we're in static deployment mode
+  private isStaticDeployment(): boolean {
+    return !process.env.REACT_APP_API_URL || process.env.REACT_APP_API_URL.includes('your-backend-api-url.com');
+  }
+
   // Auth API
   async login(email: string, password: string) {
-    const response = await this.api.post<ApiResponse>('/auth/login', {
-      email,
-      password,
-    });
-    return response.data;
+    try {
+      const response = await this.api.post<ApiResponse>('/auth/login', {
+        email,
+        password,
+      });
+      return response.data;
+    } catch (error: any) {
+      // For static deployment, provide demo login
+      if (this.isStaticDeployment() && email === 'admin@miiracer.com' && password === 'admin123!') {
+        const mockToken = 'demo-admin-token-' + Date.now();
+        localStorage.setItem('miiracer_token', mockToken);
+        localStorage.setItem('miiracer_admin', JSON.stringify({
+          id: 'demo-admin',
+          email: 'admin@miiracer.com',
+          name: '관리자',
+          role: 'admin'
+        }));
+        
+        return {
+          success: true,
+          message: '데모 모드로 로그인되었습니다.',
+          data: {
+            token: mockToken,
+            admin: {
+              id: 'demo-admin',
+              email: 'admin@miiracer.com',
+              name: '관리자',
+              role: 'admin'
+            }
+          }
+        };
+      }
+      throw error;
+    }
   }
 
   async getProfile() {
@@ -201,11 +238,39 @@ class ApiService {
 
   // Participant API
   async applyParticipant(participantData: any) {
-    const response = await this.api.post<ApiResponse>(
-      '/participants/apply',
-      participantData
-    );
-    return response.data;
+    try {
+      const response = await this.api.post<ApiResponse>(
+        '/participants/apply',
+        participantData
+      );
+      return response.data;
+    } catch (error: any) {
+      // For static deployment, simulate successful registration
+      if (this.isStaticDeployment()) {
+        const mockApplication = {
+          id: 'demo-participant-' + Date.now(),
+          name: participantData.name,
+          email: participantData.email,
+          phone: participantData.phone,
+          skillLevel: participantData.skillLevel,
+          eventType: participantData.eventType,
+          status: 'pending',
+          submittedAt: new Date().toISOString()
+        };
+        
+        // Store in localStorage for demo purposes
+        const existingApplications = JSON.parse(localStorage.getItem('demo_applications') || '[]');
+        existingApplications.push(mockApplication);
+        localStorage.setItem('demo_applications', JSON.stringify(existingApplications));
+        
+        return {
+          success: true,
+          message: '데모 모드: 참가 신청이 접수되었습니다. 실제 환경에서는 관리자 승인 후 확정됩니다.',
+          data: mockApplication
+        };
+      }
+      throw error;
+    }
   }
 
   async getParticipants(params?: {

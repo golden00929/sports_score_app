@@ -3,15 +3,17 @@
   command = "npm run build"
   
 [build.environment]
-  REACT_APP_API_URL = "https://your-backend-api-url.com/api"
+  # Leave API_URL unset to enable demo mode for mobile testing
+  # Set REACT_APP_API_URL in Netlify dashboard when backend is ready
   CI = "false"
 
-# Redirect API calls to external backend
-[[redirects]]
-  from = "/api/*"
-  to = "https://your-backend-api-url.com/api/:splat"
-  status = 200
-  force = true
+# For now, don't redirect API calls - let them fail gracefully to demo mode
+# Uncomment and update URL when backend is deployed:
+# [[redirects]]
+#   from = "/api/*"
+#   to = "https://your-actual-backend-url.com/api/:splat"
+#   status = 200
+#   force = true
 
 # SPA fallback for client-side routing
 [[redirects]]
