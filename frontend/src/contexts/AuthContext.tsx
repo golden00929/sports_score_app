@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useEffect, useState } from 'react';
+import React, { createContext, useContext, useEffect, useState, useCallback } from 'react';
 import { Admin, AuthResponse } from '../types';
 import apiService from '../services/api';
 
@@ -65,7 +65,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     setAdmin(null);
   };
 
-  const checkAuth = async () => {
+  const checkAuth = useCallback(async () => {
     try {
       setIsLoading(true);
       const token = localStorage.getItem('miiracer_token');
@@ -107,11 +107,11 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     } finally {
       setIsLoading(false);
     }
-  };
+  }, []);
 
   useEffect(() => {
     checkAuth();
-  }, []);
+  }, [checkAuth]);
 
   const value: AuthContextType = {
     admin,

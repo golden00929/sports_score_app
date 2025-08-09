@@ -1,12 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import {
   Box,
-  Paper,
   Typography,
   Button,
-  Card,
-  CardContent,
-  Grid,
   Dialog,
   DialogTitle,
   DialogContent,
@@ -17,11 +13,9 @@ import {
   ListItemText,
   Chip,
   Alert,
-  IconButton,
   Tooltip,
 } from '@mui/material';
 import {
-  Person,
   Shuffle,
   Save,
   Clear,
@@ -76,14 +70,7 @@ const BracketVisualizer: React.FC<BracketVisualizerProps> = ({
   const [playerSlot, setPlayerSlot] = useState<'player1' | 'player2'>('player1');
   const [unassignedParticipants, setUnassignedParticipants] = useState<Participant[]>([]);
 
-  useEffect(() => {
-    if (bracket?.matches) {
-      setMatches(bracket.matches);
-      updateUnassignedParticipants(bracket.matches);
-    }
-  }, [bracket, availableParticipants]);
-
-  const updateUnassignedParticipants = (currentMatches: Match[]) => {
+  const updateUnassignedParticipants = useCallback((currentMatches: Match[]) => {
     const assignedIds = new Set<string>();
     currentMatches.forEach(match => {
       if (match.player1Id) assignedIds.add(match.player1Id);
@@ -92,7 +79,14 @@ const BracketVisualizer: React.FC<BracketVisualizerProps> = ({
 
     const unassigned = availableParticipants.filter(p => !assignedIds.has(p.id));
     setUnassignedParticipants(unassigned);
-  };
+  }, [availableParticipants]);
+
+  useEffect(() => {
+    if (bracket?.matches) {
+      setMatches(bracket.matches);
+      updateUnassignedParticipants(bracket.matches);
+    }
+  }, [bracket, availableParticipants, updateUnassignedParticipants]);
 
   const handleAssignParticipant = (participant: Participant) => {
     if (!selectedMatch) return;
@@ -278,11 +272,6 @@ const BracketVisualizer: React.FC<BracketVisualizerProps> = ({
     updateUnassignedParticipants(updatedMatches);
   };
 
-  const openParticipantDialog = (match: Match, slot: 'player1' | 'player2') => {
-    setSelectedMatch(match);
-    setPlayerSlot(slot);
-    setParticipantDialogOpen(true);
-  };
 
 
   return (

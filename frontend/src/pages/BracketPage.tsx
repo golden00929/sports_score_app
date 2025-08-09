@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import {
   Typography,
   Box,
@@ -18,7 +18,6 @@ import {
 import {
   ExpandMore,
   SportsHandball,
-  EmojiEvents,
   Visibility,
 } from '@mui/icons-material';
 import apiService from '../services/api';
@@ -72,11 +71,7 @@ const BracketPage: React.FC = () => {
   const [visualizerOpen, setVisualizerOpen] = useState(false);
   const [bracketForVisualizer, setBracketForVisualizer] = useState<Bracket | null>(null);
 
-  useEffect(() => {
-    loadBracketData();
-  }, []);
-
-  const loadBracketData = async () => {
+  const loadBracketData = useCallback(async () => {
     try {
       setLoading(true);
       setError('');
@@ -124,7 +119,11 @@ const BracketPage: React.FC = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [tournamentId]);
+
+  useEffect(() => {
+    loadBracketData();
+  }, [loadBracketData]);
 
   const openBracketVisualizer = (bracket: Bracket) => {
     setBracketForVisualizer(bracket);

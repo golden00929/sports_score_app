@@ -19,17 +19,12 @@ import {
   Container,
   Grid,
   Paper,
-  Divider,
   Chip,
   Stepper,
   Step,
   StepLabel,
-  Dialog,
-  DialogTitle,
-  DialogContent,
-  DialogActions,
 } from '@mui/material';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { CheckCircle, Person, LocationOn, Payment, Info } from '@mui/icons-material';
 import apiService from '../services/api';
 import { formatDateRange } from '../utils/dateFormat';

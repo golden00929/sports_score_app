@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import {
   Typography,
   Box,
@@ -28,17 +28,14 @@ import {
   FormControl,
   InputLabel,
   Select,
-  SelectChangeEvent,
   Alert,
   CircularProgress,
   Avatar,
   Tabs,
   Tab,
-  Badge,
   FormControlLabel,
 } from '@mui/material';
 import {
-  Dashboard,
   People,
   EmojiEvents,
   Schedule,
@@ -47,8 +44,6 @@ import {
   AccountCircle,
   Add,
   Edit,
-  Delete,
-  Visibility,
   Upload,
   Download,
   CheckCircle,
@@ -58,7 +53,7 @@ import {
   Image,
 } from '@mui/icons-material';
 import { useAuth } from '../contexts/AuthContext';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import apiService from '../services/api';
 import BracketVisualizer from '../components/BracketVisualizer';
 import SlideManager from '../components/SlideManager';
@@ -140,11 +135,9 @@ const AdminDashboard: React.FC = () => {
   
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [currentTab, setCurrentTab] = useState(0);
-  const [stats, setStats] = useState<TournamentStats | null>(null);
   const [participants, setParticipants] = useState<Participant[]>([]);
   const [tournament, setTournament] = useState<TournamentInfo | null>(null);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState('');
   const [selectedParticipant, setSelectedParticipant] = useState<Participant | null>(null);
   const [dialogOpen, setDialogOpen] = useState(false);
   const [actionType, setActionType] = useState<'approve' | 'reject' | 'payment'>('approve');
@@ -187,11 +180,7 @@ const AdminDashboard: React.FC = () => {
     maxParticipants: 16,
   });
 
-  useEffect(() => {
-    loadDashboardData();
-  }, [selectedTournamentContext]);
-
-  const loadDashboardData = async () => {
+  const loadDashboardData = useCallback(async () => {
     try {
       setLoading(true);
       
@@ -207,9 +196,6 @@ const AdminDashboard: React.FC = () => {
       console.log('Loading tournament stats...');
       const statsResponse = await apiService.getTournamentStats();
       console.log('Stats response:', statsResponse);
-      if (statsResponse.success) {
-        setStats(statsResponse.data);
-      }
 
       // Load participants (filtered by selected tournament or all)
       console.log('Loading participants...');
@@ -243,7 +229,11 @@ const AdminDashboard: React.FC = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [selectedTournamentContext, tournament?.id]);
+
+  useEffect(() => {
+    loadDashboardData();
+  }, [loadDashboardData]);
 
   const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
@@ -294,52 +284,10 @@ const AdminDashboard: React.FC = () => {
       loadDashboardData();
     } catch (error) {
       console.error('Payment reset failed:', error);
-      setError('결제 상태 변경 중 오류가 발생했습니다.');
     }
   };
 
-  const handleAddTestParticipant = async () => {
-    try {
-      const testParticipant = {
-        name: `테스트참가자${Math.floor(Math.random() * 1000)}`,
-        gender: 'male',
-        birthYear: 1990 + Math.floor(Math.random() * 20),
-        province: Math.random() > 0.5 ? 'HCM' : 'HN',
-        district: Math.random() > 0.5 ? 'HCM-Q1' : 'HN-HK',
-        phone: `090${Math.floor(Math.random() * 10000000).toString().padStart(7, '0')}`,
-        experience: ['1년', '2년', '3년', '5년 이상'][Math.floor(Math.random() * 4)],
-        skillLevel: ['A', 'B', 'C'][Math.floor(Math.random() * 3)],
-        eventType: ['men_singles', 'women_singles', 'men_doubles', 'women_doubles', 'mixed_doubles'][Math.floor(Math.random() * 5)],
-        partnerName: '',
-        partnerPhone: '',
-        tournamentId: 'sample-tournament-id',
-      };
 
-      const response = await apiService.applyParticipant(testParticipant);
-      if (response.success) {
-        loadDashboardData();
-        console.log('Test participant added successfully');
-      }
-    } catch (error) {
-      console.error('Failed to add test participant:', error);
-      setError('테스트 참가자 추가 중 오류가 발생했습니다.');
-    }
-  };
-
-  const handleEditTournament = () => {
-    if (tournament) {
-      setEditTournamentData({
-        name: tournament.name,
-        description: tournament.description || '',
-        location: tournament.location,
-        maxParticipants: tournament.maxParticipants,
-        startDate: convertISOToFormDate(tournament.startDate),
-        endDate: convertISOToFormDate(tournament.endDate),
-        registrationEnd: convertISOToFormDate(tournament.registrationEnd || tournament.endDate),
-      });
-      setEditTournamentOpen(true);
-    }
-  };
 
   const handleSaveTournament = async () => {
     try {
@@ -354,7 +302,6 @@ const AdminDashboard: React.FC = () => {
       }
     } catch (error: any) {
       console.error('Tournament update failed:', error);
-      setError(error.response?.data?.message || '대회 정보 업데이트 중 오류가 발생했습니다.');
     }
   };
 
@@ -363,7 +310,7 @@ const AdminDashboard: React.FC = () => {
       console.log('Starting Excel download...');
       
       if (participants.length === 0) {
-        setError('다운로드할 참가자 데이터가 없습니다.');
+        console.error('다운로드할 참가자 데이터가 없습니다.');
         return;
       }
       
@@ -375,7 +322,6 @@ const AdminDashboard: React.FC = () => {
       
     } catch (error) {
       console.error('Excel download failed:', error);
-      setError('엑셀 다운로드 중 오류가 발생했습니다.');
     }
   };
 
@@ -472,12 +418,12 @@ const AdminDashboard: React.FC = () => {
   const handlePasswordChange = async () => {
     try {
       if (passwordChangeData.newPassword !== passwordChangeData.confirmPassword) {
-        setError('새 비밀번호와 확인 비밀번호가 일치하지 않습니다.');
+        console.error('Password confirmation mismatch');
         return;
       }
 
       if (passwordChangeData.newPassword.length < 6) {
-        setError('새 비밀번호는 최소 6자리 이상이어야 합니다.');
+        console.error('Password too short');
         return;
       }
 
@@ -495,7 +441,7 @@ const AdminDashboard: React.FC = () => {
         alert('비밀번호가 성공적으로 변경되었습니다.');
       }
     } catch (error: any) {
-      setError(error.response?.data?.message || '비밀번호 변경 중 오류가 발생했습니다.');
+      console.error('Password change failed:', error);
     }
   };
 
@@ -505,7 +451,7 @@ const AdminDashboard: React.FC = () => {
       console.log('Profile update:', profileData);
       alert('프로필이 업데이트되었습니다.');
     } catch (error: any) {
-      setError('프로필 업데이트 중 오류가 발생했습니다.');
+      console.error('Profile update failed:', error);
     }
   };
 
@@ -543,7 +489,7 @@ const AdminDashboard: React.FC = () => {
       }
     } catch (error: any) {
       console.error('Error creating bracket:', error);
-      setError(error.response?.data?.message || '브라켓 생성 중 오류가 발생했습니다.');
+      console.error('Bracket creation failed:', error);
     }
   };
 
@@ -561,7 +507,7 @@ const AdminDashboard: React.FC = () => {
         setBracketForVisualizer(null);
       }
     } catch (error: any) {
-      setError(error.response?.data?.message || '브라켓 업데이트 중 오류가 발생했습니다.');
+      console.error('Bracket update failed:', error);
     }
   };
 
@@ -570,7 +516,7 @@ const AdminDashboard: React.FC = () => {
       await apiService.updateBracketStatus(bracketId, status);
       loadDashboardData();
     } catch (error: any) {
-      setError(error.response?.data?.message || '브라켓 상태 업데이트 중 오류가 발생했습니다.');
+      console.error('Bracket status update failed:', error);
     }
   };
 
@@ -580,7 +526,7 @@ const AdminDashboard: React.FC = () => {
         await apiService.deleteBracket(bracketId);
         loadDashboardData();
       } catch (error: any) {
-        setError(error.response?.data?.message || '브라켓 삭제 중 오류가 발생했습니다.');
+        console.error('Bracket deletion failed:', error);
       }
     }
   };

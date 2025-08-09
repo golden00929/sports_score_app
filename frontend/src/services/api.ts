@@ -39,12 +39,8 @@ class ApiService {
           localStorage.removeItem('miiracer_token');
           localStorage.removeItem('miiracer_admin');
           
-          // Only redirect to login if we're on admin routes or the error came from an admin API
+          // Only redirect to login if we're on admin routes
           const isAdminRoute = window.location.pathname.startsWith('/admin');
-          const isAdminAPI = error.config?.url?.includes('/admin') || 
-                            error.config?.url?.includes('/profile') ||
-                            error.config?.url?.includes('/tournament') ||
-                            error.config?.url?.includes('/bracket');
           
           if (isAdminRoute) {
             window.location.href = '/admin/login';
