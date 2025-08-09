@@ -1,0 +1,20 @@
+[build]
+  publish = "build"
+  command = "npm run build"
+  
+[build.environment]
+  REACT_APP_API_URL = "https://your-backend-api-url.com/api"
+  CI = "false"
+
+# Redirect API calls to external backend
+[[redirects]]
+  from = "/api/*"
+  to = "https://your-backend-api-url.com/api/:splat"
+  status = 200
+  force = true
+
+# SPA fallback for client-side routing
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200

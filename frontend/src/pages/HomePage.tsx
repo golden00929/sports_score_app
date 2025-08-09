@@ -56,11 +56,28 @@ const HomePage: React.FC = () => {
 
   const { data: slidesData } = useQuery(
     'promo-slides',
-    () => fetch('/api/slides').then(res => res.json()),
+    async () => {
+      try {
+        const response = await fetch('/api/slides');
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const contentType = response.headers.get('content-type');
+        if (!contentType || !contentType.includes('application/json')) {
+          console.warn('API returned non-JSON response, using fallback data');
+          return { success: false, data: [] };
+        }
+        return await response.json();
+      } catch (error) {
+        console.warn('Failed to fetch slides from API, using fallback data:', error);
+        return { success: false, data: [] };
+      }
+    },
     {
       onError: (error) => {
         console.error('Failed to fetch slides:', error);
       },
+      retry: false, // Don't retry on Netlify static deployment
     }
   );
 
