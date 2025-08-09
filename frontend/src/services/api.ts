@@ -80,13 +80,86 @@ class ApiService {
 
   // Tournament API
   async getTournamentInfo() {
-    const response = await this.api.get<ApiResponse>('/tournament');
-    return response.data;
+    try {
+      const response = await this.api.get<ApiResponse>('/tournament');
+      return response.data;
+    } catch (error) {
+      // Fallback mock data for static deployment
+      return {
+        success: true,
+        data: {
+          id: 1,
+          name: "2025 호치민 배드민턴 챔피언십",
+          description: "Miiracer Sports Score가 제공하는 프리미엄 배드민턴 토너먼트! A조부터 C조까지 모든 레벨의 선수가 참가할 수 있으며, 실시간 스코어 관리 시스템을 제공합니다.",
+          location: "호치민시 7군 스포츠 센터",
+          startDate: "2025-08-15",
+          endDate: "2025-08-16",
+          maxParticipants: 64,
+          participantFee: 200000,
+          status: "upcoming",
+          stats: {
+            approvedParticipants: 32,
+            availableSlots: 32,
+            totalBrackets: 4,
+            daysUntilStart: 6,
+            isRegistrationOpen: true
+          }
+        }
+      };
+    }
   }
 
   async getAllTournaments() {
-    const response = await this.api.get<ApiResponse>('/tournament/all');
-    return response.data;
+    try {
+      const response = await this.api.get<ApiResponse>('/tournament/all');
+      return response.data;
+    } catch (error) {
+      // Fallback mock data for static deployment
+      return {
+        success: true,
+        data: [
+          {
+            id: 1,
+            name: "2025 호치민 배드민턴 챔피언십",
+            description: "A조부터 C조까지 모든 레벨 참가 가능",
+            location: "호치민시 7군 스포츠 센터",
+            startDate: "2025-08-15",
+            status: "upcoming",
+            maxParticipants: 64,
+            stats: {
+              approvedParticipants: 32,
+              totalBrackets: 4
+            }
+          },
+          {
+            id: 2,
+            name: "주말 배드민턴 리그",
+            description: "매주 토요일 정기 리그전",
+            location: "호치민시 1군 배드민턴장",
+            startDate: "2025-08-10",
+            status: "ongoing",
+            maxParticipants: 32,
+            stats: {
+              approvedParticipants: 28,
+              totalBrackets: 2
+            }
+          },
+          {
+            id: 3,
+            name: "초급자 배드민턴 대회",
+            description: "배드민턴 입문자를 위한 친선 대회",
+            location: "호치민시 3군 스포츠 센터",
+            startDate: "2025-08-20",
+            status: "upcoming",
+            maxParticipants: 48,
+            stats: {
+              approvedParticipants: 18,
+              totalBrackets: 3
+            }
+          }
+        ]
+      };
+    }
   }
 
   async createOrUpdateTournament(formData: FormData) {
