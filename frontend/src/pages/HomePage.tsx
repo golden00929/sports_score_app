@@ -119,6 +119,26 @@ const HomePage: React.FC = () => {
 
   return (
     <Box>
+      {/* Latest Update Banner */}
+      <Paper
+        elevation={2}
+        sx={{
+          background: `linear-gradient(135deg, #FF6B35 0%, #F7931E 100%)`,
+          color: 'white',
+          p: 3,
+          mb: 3,
+          borderRadius: 2,
+          textAlign: 'center',
+        }}
+      >
+        <Typography variant="h5" gutterBottom fontWeight="bold">
+          🚀 최신 업데이트! v2.0 | Aug 9, 2025
+        </Typography>
+        <Typography variant="body1" sx={{ opacity: 0.95 }}>
+          새로운 대회 관리 시스템이 업데이트되었습니다! 실시간 대회 현황과 참가 신청 기능을 확인해보세요.
+        </Typography>
+      </Paper>
+
       {/* Admin Welcome Message */}
       {isAuthenticated && (
         <Paper
