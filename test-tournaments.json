@@ -1,0 +1,47 @@
+[
+  {
+    "name": "2025 Spring Championship",
+    "description": "봄 시즌을 맞이하여 개최되는 배드민턴 챔피언십입니다. 새로운 시즌의 시작을 알리는 대회로, 모든 레벨의 선수들이 참가할 수 있습니다.",
+    "startDate": "2025-03-15",
+    "endDate": "2025-03-16", 
+    "registrationStart": "2025-01-15",
+    "registrationEnd": "2025-03-01",
+    "location": "호치민시 1군 스포츠 센터",
+    "venue": "District 1 Sports Complex",
+    "contactPhone": "0901234567",
+    "contactSns": "https://facebook.com/miiracer.spring",
+    "participantFee": 250000,
+    "maxParticipants": 100,
+    "status": "upcoming"
+  },
+  {
+    "name": "2025 Summer Open Tournament",
+    "description": "여름 오픈 토너먼트로, 국제적인 규모의 대회입니다. 베트남 전역에서 참가자들이 모이는 대규모 이벤트입니다.",
+    "startDate": "2025-06-20",
+    "endDate": "2025-06-22",
+    "registrationStart": "2025-04-01", 
+    "registrationEnd": "2025-06-05",
+    "location": "호치민시 7군 스포츠 센터",
+    "venue": "Saigon Sports Complex",
+    "contactPhone": "0901234567",
+    "contactSns": "https://facebook.com/miiracer.summer",
+    "participantFee": 300000,
+    "maxParticipants": 200,
+    "status": "upcoming"
+  },
+  {
+    "name": "2024 Winter Finals",
+    "description": "2024년을 마무리하는 윈터 파이널 대회입니다. 한 해 동안의 우수한 성적을 거둔 선수들이 참가하는 프리미엄 토너먼트입니다.",
+    "startDate": "2024-12-15",
+    "endDate": "2024-12-16",
+    "registrationStart": "2024-10-01",
+    "registrationEnd": "2024-12-01", 
+    "location": "호치민시 3군 스포츠 센터",
+    "venue": "District 3 Sports Arena",
+    "contactPhone": "0901234567",
+    "contactSns": "https://facebook.com/miiracer.winter",
+    "participantFee": 400000,
+    "maxParticipants": 80,
+    "status": "completed"
+  }
+]

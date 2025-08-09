@@ -1,0 +1,14 @@
+{
+  "name": "이민호",
+  "gender": "male",
+  "birthYear": 1990,
+  "province": "01",
+  "district": "001", 
+  "phone": "0912345679",
+  "experience": "3년~5년",
+  "skillLevel": "B",
+  "eventType": "men_singles",
+  "partnerName": "",
+  "partnerPhone": "",
+  "tournamentId": "sample-tournament-id"
+}

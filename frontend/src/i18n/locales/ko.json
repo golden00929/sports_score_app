@@ -1,0 +1,135 @@
+{
+  "common": {
+    "confirm": "확인",
+    "cancel": "취소",
+    "save": "저장",
+    "edit": "수정",
+    "delete": "삭제",
+    "close": "닫기",
+    "loading": "로딩 중...",
+    "error": "오류",
+    "success": "성공",
+    "warning": "경고",
+    "info": "정보",
+    "search": "검색",
+    "reset": "초기화",
+    "submit": "제출",
+    "back": "뒤로",
+    "next": "다음",
+    "previous": "이전",
+    "home": "홈",
+    "admin": "관리자",
+    "logout": "로그아웃"
+  },
+  "nav": {
+    "tournament": "대회 개요",
+    "registration": "참가 신청",
+    "bracket": "대진표",
+    "schedule": "시간표",
+    "results": "결과",
+    "dashboard": "대시보드"
+  },
+  "tournament": {
+    "title": "대회 개요",
+    "name": "대회명",
+    "description": "대회 설명",
+    "dates": "대회 일정",
+    "registration_period": "신청 기간",
+    "location": "장소",
+    "venue": "경기장",
+    "contact": "문의처",
+    "organizer": "주최",
+    "host": "주관",
+    "sponsors": "후원",
+    "rules": "대회 규정",
+    "fee": "참가비",
+    "max_participants": "최대 참가인원",
+    "current_participants": "현재 참가자",
+    "available_slots": "남은 자리",
+    "status": {
+      "upcoming": "예정",
+      "ongoing": "진행중",
+      "completed": "완료"
+    }
+  },
+  "registration": {
+    "title": "참가 신청",
+    "apply_now": "지금 신청하기",
+    "personal_info": "개인 정보",
+    "name": "이름",
+    "gender": "성별",
+    "birth_year": "출생년도",
+    "location": "거주지",
+    "province": "시/성",
+    "district": "구/군",
+    "phone": "전화번호",
+    "experience": "배드민턴 경력",
+    "skill_level": "실력 레벨",
+    "payment_info": "결제 정보",
+    "bank_transfer": "계좌 이체",
+    "success_message": "참가 신청이 완료되었습니다. 관리자 승인 후 연락드리겠습니다.",
+    "gender_options": {
+      "male": "남성",
+      "female": "여성"
+    },
+    "experience_options": {
+      "6months_1year": "6개월~1년",
+      "1_2years": "1년~2년",
+      "2_3years": "2년~3년",
+      "3_5years": "3년~5년",
+      "5years_plus": "5년 이상"
+    },
+    "skill_levels": {
+      "A": "A급 (상급자)",
+      "B": "B급 (중급자)", 
+      "C": "C급 (초급자)"
+    }
+  },
+  "bracket": {
+    "title": "대진표",
+    "coming_soon": "대진표가 곧 공개됩니다",
+    "not_ready": "아직 대진표가 준비되지 않았습니다",
+    "download": "대진표 다운로드"
+  },
+  "schedule": {
+    "title": "시간표",
+    "court": "코트",
+    "time": "시간",
+    "match": "경기",
+    "players": "선수"
+  },
+  "results": {
+    "title": "대회 결과",
+    "final_results": "최종 결과",
+    "match_results": "경기 결과"
+  },
+  "admin": {
+    "login": "관리자 로그인",
+    "dashboard": "관리자 대시보드",
+    "tournament_management": "대회 관리",
+    "participant_management": "참가자 관리",
+    "bracket_management": "대진표 관리",
+    "email": "이메일",
+    "password": "비밀번호",
+    "login_button": "로그인",
+    "participants": {
+      "total": "전체 참가자",
+      "pending": "승인 대기",
+      "approved": "승인됨",
+      "rejected": "거부됨",
+      "paid": "결제 완료",
+      "approval_status": "승인 상태",
+      "payment_status": "결제 상태",
+      "approve": "승인",
+      "reject": "거부",
+      "export": "엑셀 다운로드"
+    }
+  },
+  "errors": {
+    "required": "필수 입력 항목입니다",
+    "invalid_email": "올바른 이메일 주소를 입력해주세요",
+    "invalid_phone": "올바른 전화번호를 입력해주세요",
+    "network_error": "네트워크 오류가 발생했습니다",
+    "server_error": "서버 오류가 발생했습니다"
+  }
+}

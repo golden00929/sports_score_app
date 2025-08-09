@@ -1,0 +1,7 @@
+{
+  "name": "A급 남자 단식 테스트",
+  "skillLevel": "A",
+  "gender": "male",
+  "type": "single_elimination",
+  "participantIds": ["test-01", "test-02"]
+}

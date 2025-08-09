@@ -1,0 +1,135 @@
+{
+  "common": {
+    "confirm": "Xác nhận",
+    "cancel": "Hủy",
+    "save": "Lưu",
+    "edit": "Chỉnh sửa",
+    "delete": "Xóa",
+    "close": "Đóng",
+    "loading": "Đang tải...",
+    "error": "Lỗi",
+    "success": "Thành công",
+    "warning": "Cảnh báo",
+    "info": "Thông tin",
+    "search": "Tìm kiếm",
+    "reset": "Đặt lại",
+    "submit": "Gửi",
+    "back": "Quay lại",
+    "next": "Tiếp theo",
+    "previous": "Trước đó",
+    "home": "Trang chủ",
+    "admin": "Quản trị",
+    "logout": "Đăng xuất"
+  },
+  "nav": {
+    "tournament": "Thông tin giải",
+    "registration": "Đăng ký",
+    "bracket": "Bảng đấu",
+    "schedule": "Lịch thi đấu",
+    "results": "Kết quả",
+    "dashboard": "Bảng điều khiển"
+  },
+  "tournament": {
+    "title": "Thông tin giải đấu",
+    "name": "Tên giải",
+    "description": "Mô tả",
+    "dates": "Thời gian",
+    "registration_period": "Thời gian đăng ký",
+    "location": "Địa điểm",
+    "venue": "Sân thi đấu",
+    "contact": "Liên hệ",
+    "organizer": "Chủ tổ chức",
+    "host": "Đơn vị tổ chức",
+    "sponsors": "Nhà tài trợ",
+    "rules": "Thể lệ",
+    "fee": "Lệ phí tham gia",
+    "max_participants": "Số người tối đa",
+    "current_participants": "Người tham gia hiện tại",
+    "available_slots": "Chỗ còn lại",
+    "status": {
+      "upcoming": "Sắp diễn ra",
+      "ongoing": "Đang diễn ra",
+      "completed": "Đã kết thúc"
+    }
+  },
+  "registration": {
+    "title": "Đăng ký tham gia",
+    "apply_now": "Đăng ký ngay",
+    "personal_info": "Thông tin cá nhân",
+    "name": "Họ tên",
+    "gender": "Giới tính",
+    "birth_year": "Năm sinh",
+    "location": "Nơi cư trú",
+    "province": "Tỉnh/Thành phố",
+    "district": "Quận/Huyện",
+    "phone": "Số điện thoại",
+    "experience": "Kinh nghiệm cầu lông",
+    "skill_level": "Trình độ",
+    "payment_info": "Thông tin thanh toán",
+    "bank_transfer": "Chuyển khoản ngân hàng",
+    "success_message": "Đăng ký thành công. Chúng tôi sẽ liên hệ sau khi phê duyệt.",
+    "gender_options": {
+      "male": "Nam",
+      "female": "Nữ"
+    },
+    "experience_options": {
+      "6months_1year": "6 tháng - 1 năm",
+      "1_2years": "1 - 2 năm",
+      "2_3years": "2 - 3 năm", 
+      "3_5years": "3 - 5 năm",
+      "5years_plus": "Trên 5 năm"
+    },
+    "skill_levels": {
+      "A": "Cấp A (Cao)",
+      "B": "Cấp B (Trung bình)",
+      "C": "Cấp C (Mới bắt đầu)"
+    }
+  },
+  "bracket": {
+    "title": "Bảng đấu",
+    "coming_soon": "Bảng đấu sẽ sớm được công bố",
+    "not_ready": "Bảng đấu chưa sẵn sàng",
+    "download": "Tải xuống bảng đấu"
+  },
+  "schedule": {
+    "title": "Lịch thi đấu",
+    "court": "Sân",
+    "time": "Thời gian",
+    "match": "Trận đấu",
+    "players": "Vận động viên"
+  },
+  "results": {
+    "title": "Kết quả thi đấu",
+    "final_results": "Kết quả chung cuộc",
+    "match_results": "Kết quả trận đấu"
+  },
+  "admin": {
+    "login": "Đăng nhập quản trị",
+    "dashboard": "Bảng điều khiển",
+    "tournament_management": "Quản lý giải đấu",
+    "participant_management": "Quản lý thí sinh",
+    "bracket_management": "Quản lý bảng đấu",
+    "email": "Email",
+    "password": "Mật khẩu",
+    "login_button": "Đăng nhập",
+    "participants": {
+      "total": "Tổng thí sinh",
+      "pending": "Chờ phê duyệt",
+      "approved": "Đã phê duyệt",
+      "rejected": "Đã từ chối",
+      "paid": "Đã thanh toán",
+      "approval_status": "Trạng thái phê duyệt",
+      "payment_status": "Trạng thái thanh toán",
+      "approve": "Phê duyệt",
+      "reject": "Từ chối",
+      "export": "Xuất Excel"
+    }
+  },
+  "errors": {
+    "required": "Trường này là bắt buộc",
+    "invalid_email": "Vui lòng nhập email hợp lệ",
+    "invalid_phone": "Vui lòng nhập số điện thoại hợp lệ",
+    "network_error": "Lỗi kết nối mạng",
+    "server_error": "Lỗi máy chủ"
+  }
+}

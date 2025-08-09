@@ -1,0 +1,14 @@
+{
+  "name": "박지수",
+  "gender": "female",
+  "birthYear": 1995,
+  "province": "01",
+  "district": "001", 
+  "phone": "0976543210",
+  "experience": "2년~3년",
+  "skillLevel": "A",
+  "eventType": "women_doubles",
+  "partnerName": "김영희",
+  "partnerPhone": "0987654321",
+  "tournamentId": "sample-tournament-id"
+}

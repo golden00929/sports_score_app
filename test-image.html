@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Image Test</title>
+</head>
+<body>
+    <h1>Testing Image Loading</h1>
+    <img id="test-image" src="http://localhost:5000/uploads/images/4006d336-c0cf-49b3-94c2-037878646024-1754660105218_resized.jpg" 
+         alt="Test Image"
+         onload="console.log('Image loaded successfully')"
+         onerror="console.error('Image failed to load')"
+         style="max-width: 500px;">
+    
+    <script>
+        // Test fetch API as well
+        fetch('http://localhost:5000/uploads/images/4006d336-c0cf-49b3-94c2-037878646024-1754660105218_resized.jpg')
+            .then(response => {
+                console.log('Fetch response:', response);
+                if (response.ok) {
+                    console.log('Image fetch successful');
+                } else {
+                    console.error('Image fetch failed:', response.status);
+                }
+            })
+            .catch(error => {
+                console.error('Fetch error:', error);
+            });
+    </script>
+</body>
+</html>

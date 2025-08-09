@@ -1,0 +1,135 @@
+{
+  "common": {
+    "confirm": "Confirm",
+    "cancel": "Cancel",
+    "save": "Save",
+    "edit": "Edit",
+    "delete": "Delete",
+    "close": "Close",
+    "loading": "Loading...",
+    "error": "Error",
+    "success": "Success",
+    "warning": "Warning",
+    "info": "Information",
+    "search": "Search",
+    "reset": "Reset",
+    "submit": "Submit",
+    "back": "Back",
+    "next": "Next",
+    "previous": "Previous",
+    "home": "Home",
+    "admin": "Admin",
+    "logout": "Logout"
+  },
+  "nav": {
+    "tournament": "Tournament Info",
+    "registration": "Registration",
+    "bracket": "Bracket",
+    "schedule": "Schedule",
+    "results": "Results",
+    "dashboard": "Dashboard"
+  },
+  "tournament": {
+    "title": "Tournament Information",
+    "name": "Tournament Name",
+    "description": "Description",
+    "dates": "Tournament Dates",
+    "registration_period": "Registration Period",
+    "location": "Location",
+    "venue": "Venue",
+    "contact": "Contact",
+    "organizer": "Organizer",
+    "host": "Host",
+    "sponsors": "Sponsors",
+    "rules": "Rules",
+    "fee": "Entry Fee",
+    "max_participants": "Max Participants",
+    "current_participants": "Current Participants",
+    "available_slots": "Available Slots",
+    "status": {
+      "upcoming": "Upcoming",
+      "ongoing": "Ongoing",
+      "completed": "Completed"
+    }
+  },
+  "registration": {
+    "title": "Tournament Registration",
+    "apply_now": "Apply Now",
+    "personal_info": "Personal Information",
+    "name": "Full Name",
+    "gender": "Gender",
+    "birth_year": "Birth Year",
+    "location": "Location",
+    "province": "Province/City",
+    "district": "District",
+    "phone": "Phone Number",
+    "experience": "Badminton Experience",
+    "skill_level": "Skill Level",
+    "payment_info": "Payment Information",
+    "bank_transfer": "Bank Transfer",
+    "success_message": "Registration successful. We will contact you after approval.",
+    "gender_options": {
+      "male": "Male",
+      "female": "Female"
+    },
+    "experience_options": {
+      "6months_1year": "6 months - 1 year",
+      "1_2years": "1 - 2 years",
+      "2_3years": "2 - 3 years",
+      "3_5years": "3 - 5 years",
+      "5years_plus": "5+ years"
+    },
+    "skill_levels": {
+      "A": "Level A (Advanced)",
+      "B": "Level B (Intermediate)",
+      "C": "Level C (Beginner)"
+    }
+  },
+  "bracket": {
+    "title": "Tournament Bracket",
+    "coming_soon": "Bracket will be announced soon",
+    "not_ready": "Bracket not ready yet",
+    "download": "Download Bracket"
+  },
+  "schedule": {
+    "title": "Schedule",
+    "court": "Court",
+    "time": "Time",
+    "match": "Match",
+    "players": "Players"
+  },
+  "results": {
+    "title": "Results",
+    "final_results": "Final Results",
+    "match_results": "Match Results"
+  },
+  "admin": {
+    "login": "Admin Login",
+    "dashboard": "Admin Dashboard",
+    "tournament_management": "Tournament Management",
+    "participant_management": "Participant Management",
+    "bracket_management": "Bracket Management",
+    "email": "Email",
+    "password": "Password",
+    "login_button": "Login",
+    "participants": {
+      "total": "Total Participants",
+      "pending": "Pending Approval",
+      "approved": "Approved",
+      "rejected": "Rejected",
+      "paid": "Payment Completed",
+      "approval_status": "Approval Status",
+      "payment_status": "Payment Status",
+      "approve": "Approve",
+      "reject": "Reject",
+      "export": "Export Excel"
+    }
+  },
+  "errors": {
+    "required": "This field is required",
+    "invalid_email": "Please enter a valid email address",
+    "invalid_phone": "Please enter a valid phone number",
+    "network_error": "Network error occurred",
+    "server_error": "Server error occurred"
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "name": "B조 남자단식",
+  "skillLevel": "B",
+  "eventType": "men_singles",
+  "type": "single_elimination",
+  "participantIds": ["test-04", "test-05", "65853286-3138-4fe1-8dd3-97151edc92d7"]
+}

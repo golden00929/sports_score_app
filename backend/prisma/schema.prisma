@@ -1,0 +1,170 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Admin {
+  id        String   @id @default(uuid())
+  email     String   @unique
+  password  String
+  name      String
+  role      String   @default("admin")
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("admins")
+}
+
+model TournamentInfo {
+  id                String        @id @default(uuid())
+  name              String
+  description       String?
+  startDate         DateTime
+  endDate           DateTime
+  registrationStart DateTime
+  registrationEnd   DateTime
+  location          String
+  locationLat       Float?
+  locationLng       Float?
+  venue             String
+  posterImage       String?
+  rulesDocument     String?
+  contactPhone      String?
+  contactSns        String?
+  organizerInfo     String?
+  participantFee    Int           @default(0)
+  bankInfo          String?
+  maxParticipants   Int           @default(100)
+  status            String        @default("upcoming")
+  createdAt         DateTime      @default(now())
+  updatedAt         DateTime      @updatedAt
+  brackets          Bracket[]
+  matches           Match[]
+  participants      Participant[]
+  schedules         Schedule[]
+
+  @@map("tournament_info")
+}
+
+model Participant {
+  id               String         @id @default(uuid())
+  tournamentId     String
+  name             String
+  gender           String
+  birthYear        Int
+  province         String
+  district         String
+  phone            String
+  experience       String?
+  skillLevel       String
+  eventType        String         @default("men_singles")
+  partnerName      String?
+  partnerPhone     String?
+  registrationDate DateTime       @default(now())
+  paymentStatus    String         @default("pending")
+  approvalStatus   String         @default("pending")
+  isActive         Boolean        @default(true)
+  createdAt        DateTime       @default(now())
+  updatedAt        DateTime       @updatedAt
+  player2Matches   Match[]        @relation("Player2Matches")
+  player1Matches   Match[]        @relation("Player1Matches")
+  tournament       TournamentInfo @relation(fields: [tournamentId], references: [id], onDelete: Cascade)
+
+  @@map("participants")
+}
+
+model Bracket {
+  id           String         @id @default(uuid())
+  tournamentId String
+  name         String
+  skillLevel   String
+  eventType    String         @default("men_singles")
+  type         String         @default("single_elimination")
+  participants String
+  bracketData  String?
+  status       String         @default("draft")
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @updatedAt
+  tournament   TournamentInfo @relation(fields: [tournamentId], references: [id], onDelete: Cascade)
+  matches      Match[]
+
+  @@map("brackets")
+}
+
+model Match {
+  id              String         @id @default(uuid())
+  tournamentId    String
+  bracketId       String?
+  roundName       String
+  matchNumber     Int
+  player1Id       String?
+  player2Id       String?
+  player1Name     String?
+  player2Name     String?
+  player1Score    Int            @default(0)
+  player2Score    Int            @default(0)
+  winnerId        String?
+  status          String         @default("scheduled")
+  courtNumber     Int?
+  scheduledTime   DateTime?
+  actualStartTime DateTime?
+  actualEndTime   DateTime?
+  notes           String?
+  createdAt       DateTime       @default(now())
+  updatedAt       DateTime       @updatedAt
+  player2         Participant?   @relation("Player2Matches", fields: [player2Id], references: [id])
+  player1         Participant?   @relation("Player1Matches", fields: [player1Id], references: [id])
+  bracket         Bracket?       @relation(fields: [bracketId], references: [id], onDelete: Cascade)
+  tournament      TournamentInfo @relation(fields: [tournamentId], references: [id], onDelete: Cascade)
+
+  @@map("matches")
+}
+
+model Schedule {
+  id           String         @id @default(uuid())
+  tournamentId String
+  title        String
+  description  String?
+  startTime    DateTime
+  endTime      DateTime
+  courtNumber  Int?
+  type         String         @default("match")
+  isPublic     Boolean        @default(true)
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @updatedAt
+  tournament   TournamentInfo @relation(fields: [tournamentId], references: [id], onDelete: Cascade)
+
+  @@map("schedules")
+}
+
+model VietnamLocation {
+  id       String  @id @default(uuid())
+  nameEn   String
+  nameVi   String
+  nameKo   String?
+  type     String
+  parentId String?
+  code     String  @unique
+  isActive Boolean @default(true)
+
+  @@map("vietnam_locations")
+}
+
+model PromoSlide {
+  id          String   @id @default(uuid())
+  title       String
+  subtitle    String?
+  description String?
+  imageUrl    String?
+  orderIndex  Int      @default(0)
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map("promo_slides")
+}
