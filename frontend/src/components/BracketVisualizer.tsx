@@ -21,19 +21,13 @@ import {
   Tooltip,
 } from '@mui/material';
 import {
-  DragIndicator,
   Person,
-  SwapHoriz,
   Shuffle,
   Save,
-  Edit,
   Clear,
-  PersonAdd,
 } from '@mui/icons-material';
 import RoundRobinMatrix from './RoundRobinMatrix';
 import GroupRoundRobin from './GroupRoundRobin';
-import TournamentBracket from './TournamentBracket';
-import TournamentBracketVertical from './TournamentBracketVertical';
 import TournamentBracketHorizontal from './TournamentBracketHorizontal';
 
 interface Participant {
@@ -177,7 +171,6 @@ const BracketVisualizer: React.FC<BracketVisualizerProps> = ({
   };
 
   const handleAssignParticipantToSlot = (index: number, participant: Participant) => {
-    const updatedParticipants = [...availableParticipants];
     // RoundRobinMatrix에서 사용할 수 있도록 직접 배정
     // 이 함수는 RoundRobinMatrix 컴포넌트에서 호출됨
   };
@@ -291,156 +284,6 @@ const BracketVisualizer: React.FC<BracketVisualizerProps> = ({
     setParticipantDialogOpen(true);
   };
 
-  const renderMatch = (match: Match) => {
-    const isWaitingMatch = match.status === 'waiting' || match.isEmpty;
-    const isCompletedEmpty = match.status === 'completed' && (!match.player1Id || !match.player2Id);
-    
-    return (
-      <Paper
-        key={match.id}
-        sx={{
-          p: 2,
-          mb: 2,
-          border: '2px solid',
-          borderColor: isWaitingMatch ? 'grey.200' : 'grey.300',
-          borderRadius: 2,
-          bgcolor: isWaitingMatch ? 'grey.50' : 'background.paper',
-          opacity: isWaitingMatch ? 0.6 : 1,
-        }}
-      >
-        <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 1 }}>
-          <Typography variant="subtitle2" color="textSecondary">
-            {match.roundName} - 매치 {match.matchNumber}
-          </Typography>
-          {isWaitingMatch && (
-            <Chip
-              size="small"
-              label="대기 중"
-              color="default"
-              variant="outlined"
-              sx={{ opacity: 0.7 }}
-            />
-          )}
-          {isCompletedEmpty && (
-            <Chip
-              size="small"
-              label="부전승"
-              color="success"
-              variant="outlined"
-            />
-          )}
-        </Box>
-        
-        <Grid container spacing={1} alignItems="center">
-          {/* Player 1 */}
-          <Grid item xs={5}>
-            <Card
-              sx={{
-                minHeight: 60,
-                cursor: isWaitingMatch ? 'not-allowed' : 'pointer',
-                border: match.player1 ? '1px solid #1976d2' : '1px dashed #ccc',
-                bgcolor: match.player1 ? 'primary.50' : 'grey.50',
-                '&:hover': {
-                  bgcolor: isWaitingMatch ? 'grey.50' : match.player1 ? 'primary.100' : 'grey.100',
-                },
-                opacity: isWaitingMatch ? 0.5 : 1,
-              }}
-              onClick={() => !isWaitingMatch && openParticipantDialog(match, 'player1')}
-            >
-              <CardContent sx={{ p: 1, '&:last-child': { pb: 1 } }}>
-                {match.player1 ? (
-                  <Box>
-                    <Typography variant="body2" fontWeight="bold">
-                      {match.player1.name}
-                    </Typography>
-                    <Chip size="small" label={match.player1.skillLevel} />
-                    <IconButton
-                      size="small"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        handleRemoveParticipant(match.id, 'player1');
-                      }}
-                      sx={{ float: 'right' }}
-                    >
-                      ×
-                    </IconButton>
-                  </Box>
-                ) : (
-                  <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: 40 }}>
-                    <Typography variant="body2" color="textSecondary">
-                      {isWaitingMatch ? '빈 슬롯' : '선수 배치'}
-                    </Typography>
-                    <Person sx={{ ml: 1, color: 'grey.400' }} />
-                  </Box>
-                )}
-              </CardContent>
-            </Card>
-          </Grid>
-
-          {/* VS */}
-          <Grid item xs={2}>
-            <Typography variant="h6" align="center" color="textSecondary">
-              VS
-            </Typography>
-          </Grid>
-
-          {/* Player 2 */}
-          <Grid item xs={5}>
-            <Card
-              sx={{
-                minHeight: 60,
-                cursor: isWaitingMatch ? 'not-allowed' : 'pointer',
-                border: match.player2 ? '1px solid #1976d2' : '1px dashed #ccc',
-                bgcolor: match.player2 ? 'primary.50' : 'grey.50',
-                '&:hover': {
-                  bgcolor: isWaitingMatch ? 'grey.50' : match.player2 ? 'primary.100' : 'grey.100',
-                },
-                opacity: isWaitingMatch ? 0.5 : 1,
-              }}
-              onClick={() => !isWaitingMatch && openParticipantDialog(match, 'player2')}
-            >
-              <CardContent sx={{ p: 1, '&:last-child': { pb: 1 } }}>
-                {match.player2 ? (
-                  <Box>
-                    <Typography variant="body2" fontWeight="bold">
-                      {match.player2.name}
-                    </Typography>
-                    <Chip size="small" label={match.player2.skillLevel} />
-                    <IconButton
-                      size="small"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        handleRemoveParticipant(match.id, 'player2');
-                      }}
-                      sx={{ float: 'right' }}
-                    >
-                      ×
-                    </IconButton>
-                  </Box>
-                ) : (
-                  <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: 40 }}>
-                    <Typography variant="body2" color="textSecondary">
-                      {isWaitingMatch ? '빈 슬롯' : '선수 배치'}
-                    </Typography>
-                    <Person sx={{ ml: 1, color: 'grey.400' }} />
-                  </Box>
-                )}
-              </CardContent>
-            </Card>
-          </Grid>
-        </Grid>
-      </Paper>
-    );
-  };
-
-  // Group matches by round
-  const roundGroups = matches.reduce((acc: any, match) => {
-    if (!acc[match.roundName]) {
-      acc[match.roundName] = [];
-    }
-    acc[match.roundName].push(match);
-    return acc;
-  }, {});
 
   return (
     <Box>
